@@ -1,0 +1,6 @@
+*.json
+main.c
+prueba.txt
+*.o
+*.out
+ni_*
