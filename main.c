@@ -6,7 +6,7 @@
 /*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 11:31:13 by antonmar          #+#    #+#             */
-/*   Updated: 2020/11/03 14:22:58 by antonmar         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:38:54 by antonmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_putstr(char const *s)
 void	ft_putendl(char const *s)
 {
 	ft_putstr(s);
+	ft_putchar('\n');
 }
 
 int		main(int argc, char **argv)

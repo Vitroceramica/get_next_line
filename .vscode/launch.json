@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${fileDirname}/ni_${fileBasenameNoExtension}",
-			"args": ["prueba.txt"],
+			"args": ["long_line.txt"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

@@ -6,7 +6,7 @@
 /*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:23:02 by antonmar          #+#    #+#             */
-/*   Updated: 2020/11/03 14:41:02 by antonmar         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:45:51 by antonmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,11 @@ char	*ft_strdup(const char *string)
 char	*ft_strchr(const char *str, int c)
 {
 	char *s;
+
 	if (!str)
 		return (0);
 	s = (char *)str;
-	while (*s != (char)c)
+	while (*(s) != (char)c)
 	{
 		if (*s == '\0')
 			return (0);
