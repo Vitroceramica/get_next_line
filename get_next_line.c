@@ -6,7 +6,7 @@
 /*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:22:12 by antonmar          #+#    #+#             */
-/*   Updated: 2020/11/09 14:47:25 by antonmar         ###   ########.fr       */
+/*   Updated: 2020/11/11 13:05:49 by antonmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int		get_next_line(int fd, char **line)
 	buffer_tam = 1;
 	if (BUFFER_SIZE <= 0 || fd < 0 || line == NULL)
 		return (-1);
+	if (!(buffer = malloc(BUFFER_SIZE + 1)))
+		return (-1);
 	while (!(ft_strchr(file[fd], '\n')) && buffer_tam != 0)
 	{
-		if (!(buffer = malloc(BUFFER_SIZE + 1)))
-			return (-1);
 		if ((buffer_tam = read(fd, buffer, BUFFER_SIZE)) == -1)
 			return (-1);
 		buffer[buffer_tam] = '\0';
@@ -42,8 +42,8 @@ int		get_next_line(int fd, char **line)
 			file[fd] = ft_strdup(buffer);
 		else
 			file[fd] = ft_strjoin(file[fd], buffer);
-		free(buffer);
 	}
+	free(buffer);
 	*line = ft_substr(file[fd], 0, newline(file[fd]));
 	file[fd] = ft_substr(file[fd], newline(file[fd]) + 1, ft_strlen(file[fd]));
 	if (buffer_tam == 0)

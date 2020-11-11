@@ -6,7 +6,7 @@
 /*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:23:02 by antonmar          #+#    #+#             */
-/*   Updated: 2020/11/09 12:45:51 by antonmar         ###   ########.fr       */
+/*   Updated: 2020/11/10 12:16:24 by antonmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,21 @@ int		ft_strlen(const char *str)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		size;
+	int		size1;
 	char	*str;
 	int		i;
 	int		j;
 
 	if (!s1 || !s2)
 		return (0);
-	size = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	size1 = ft_strlen((char *)s1);
+	size = size1 + ft_strlen((char *)s2);
 	str = malloc(size + 1);
 	i = -1;
 	j = 0;
 	if (str == NULL)
 		return (NULL);
-	while (++i < ft_strlen((char *)s1))
+	while (++i < size1)
 		str[i] = s1[i];
 	while (i < size)
 	{
@@ -87,14 +89,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*str;
 	unsigned int	i;
+	unsigned int	length;
 
 	if (!s)
 		return (0);
 	str = malloc(len + 1);
-	i = 0;
 	if (str == NULL)
 		return (NULL);
-	while (i < len && start < (unsigned int)ft_strlen((char *)s))
+	i = 0;
+	length = (unsigned int)ft_strlen((char *)s);
+	while (i < len && start < length)
 	{
 		str[i] = s[start];
 		i++;

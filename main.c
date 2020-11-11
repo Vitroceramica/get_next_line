@@ -6,7 +6,7 @@
 /*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 11:31:13 by antonmar          #+#    #+#             */
-/*   Updated: 2020/11/09 12:38:54 by antonmar         ###   ########.fr       */
+/*   Updated: 2020/11/10 11:56:15 by antonmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int		main(int argc, char **argv)
 		ft_putendl(line);
 		free(line);
 	}
+	ft_putendl(line);
+	free(line);
 	if (argc == 2)
 		close(fd);
 }
