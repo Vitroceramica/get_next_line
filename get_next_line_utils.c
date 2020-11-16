@@ -6,7 +6,7 @@
 /*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:23:02 by antonmar          #+#    #+#             */
-/*   Updated: 2020/11/10 12:16:24 by antonmar         ###   ########.fr       */
+/*   Updated: 2020/11/16 14:51:58 by antonmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *s1, char const *s2)
 {
 	int		size;
 	int		size1;
@@ -51,7 +51,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_strdup(const char *string)
+char	*ft_strdup(char *string)
 {
 	int		i;
 	void	*tams;
