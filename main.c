@@ -1,45 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/30 11:31:13 by antonmar          #+#    #+#             */
+/*   Updated: 2020/11/16 13:26:17 by antonmar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 #include <string.h>
 #include <fcntl.h>
-#include "/Users/antonmar/C/GNL_lover/copy_in_here_GNL_files/GNL_TESTS.h"
 
-int	main()
+void ft_putchar(char c)
 {
-	char	*line;
-	int		result;
-	char 	buf[BUFFER_SIZE + 1];
-
-	line = NULL;
-	result = 1;
-	my_ft_putstr_fd("\n\n\t\t\tlets see how your GNL behaves with the STDIN_FILENO:\n", 1);
-	while (result > 0)
-	{
-		result = get_next_line(STDIN_FILENO, &line);
-		if (result != -1)
-		{
-			my_ft_putstr_fd(line, 1);
-			my_ft_putchar_fd('\n', 1);
-		}
-		free(line);
-	}
-	my_ft_putstr_fd("<--------END\nyour GNL returned:", 1);
-	my_ft_putnbr_fd(result, 1);
-	my_ft_putstr_fd("\n\n\t\t\tnow compare with read behavior:\n", 1);
-	result = 1;
-	while (result > 0)
-	{
-		result = read(STDIN_FILENO, buf, BUFFER_SIZE);
-		if (result != -1)
-		{
-			buf[result] = '\0';
-			my_ft_putstr_fd(buf, 1);
-		}
-		if (result && buf[result - 1] == '\n')
-			result = 0;
-	}
-	my_ft_putstr_fd("<--------END\n", 1);
-	my_ft_putnbr_fd(result, 1);
-	my_ft_putstr_fd("\n", 1);
-	return (0);
+	write(1, &c, 1);
 }
 
+void	ft_putstr(char const *s)
+{
+	int		i;
+
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
+}
+
+void	ft_putendl(char const *s)
+{
+	ft_putstr(s);
+	ft_putchar('\n');
+}
+
+int		main(int argc, char **argv)
+{
+	int		fd;
+	char	*line;
+	int ret;
+
+	if (argc == 1)
+		fd = 0;
+	else if (argc == 2)
+		fd = open(argv[1], O_RDONLY);
+	else
+		return (2);
+	while ((ret = get_next_line(fd, &line)) == 1)
+	{
+		ft_putendl(line);
+		free(line);
+	}
+	ft_putendl(line);
+	free(line);
+	if (argc == 2)
+		close(fd);
+}
