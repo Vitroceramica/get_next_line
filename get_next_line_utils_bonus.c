@@ -6,11 +6,11 @@
 /*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:23:02 by antonmar          #+#    #+#             */
-/*   Updated: 2020/11/19 11:20:10 by antonmar         ###   ########.fr       */
+/*   Updated: 2020/11/23 14:23:23 by antonmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int		ft_strlen(const char *str)
 {
