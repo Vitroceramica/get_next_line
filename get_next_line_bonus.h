@@ -6,7 +6,7 @@
 /*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:24:11 by antonmar          #+#    #+#             */
-/*   Updated: 2020/11/23 14:22:53 by antonmar         ###   ########.fr       */
+/*   Updated: 2020/11/30 13:57:32 by antonmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <unistd.h>
 
 int		get_next_line(int fd, char **line);
+int		free_file(char **file);
 int		newline(char *file);
-void	file_filler(char **file, char *buffer, int fd);
+void	file_filler(char **file, char *buffer);
+void	line_filler(char **line, char **file);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strlen(const char *str);
 char	*ft_strdup(char *string);

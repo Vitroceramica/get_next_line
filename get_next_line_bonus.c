@@ -6,13 +6,20 @@
 /*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:22:12 by antonmar          #+#    #+#             */
-/*   Updated: 2020/11/23 14:24:36 by antonmar         ###   ########.fr       */
+/*   Updated: 2020/11/30 14:06:23 by antonmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-int		newline(char *file)
+int		free_file(char **file)
+{
+	(*file) ? free(*file) : NULL;
+	*file = NULL;
+	return (0);
+}
+
+int		newline_pos(char *file)
 {
 	int i;
 
@@ -22,19 +29,33 @@ int		newline(char *file)
 	return (i);
 }
 
-void	file_filler(char **file, char *buffer, int fd)
+void	file_filler(char **file, char *buffer)
 {
 	char		*temp;
 
-	if (file[fd] == NULL)
-		file[fd] = ft_strdup(buffer);
+	if (*file == NULL)
+		*file = ft_strdup(buffer);
 	else
 	{
-		temp = file[fd];
-		file[fd] = ft_strjoin(file[fd], buffer);
+		temp = *file;
+		*file = ft_strjoin(*file, buffer);
 		if (temp)
-			free(temp);
+		{
+			(temp) ? free(temp) : NULL;
+			temp = NULL;
+		}
 	}
+}
+
+void	line_filler(char **line, char **file)
+{
+	char		*temp;
+
+	temp = *file;
+	*line = ft_substr(*file, 0, newline_pos(*file));
+	*file = ft_substr(*file, newline_pos(*file) + 1, ft_strlen(*file));
+	(temp) ? free(temp) : NULL;
+	temp = NULL;
 }
 
 int		get_next_line(int fd, char **line)
@@ -42,26 +63,24 @@ int		get_next_line(int fd, char **line)
 	static char	*file[4096];
 	char		*buffer;
 	int			buffer_tam;
-	char		*temp;
 
+	if (BUFFER_SIZE <= 0 || fd < 0 || line == NULL ||
+		!(buffer = malloc(BUFFER_SIZE + 1)))
+		return (-1);
 	buffer_tam = 1;
-	if (BUFFER_SIZE <= 0 || fd < 0 || line == NULL)
-		return (-1);
-	if (!(buffer = malloc(BUFFER_SIZE + 1)))
-		return (-1);
 	while (!(ft_strchr(file[fd], '\n')) && buffer_tam != 0)
 	{
 		if ((buffer_tam = read(fd, buffer, BUFFER_SIZE)) == -1)
+		{
+			free(buffer);
 			return (-1);
+		}
 		buffer[buffer_tam] = '\0';
-		file_filler(file, buffer, fd);
+		file_filler(&file[fd], buffer);
 	}
 	free(buffer);
-	temp = file[fd];
-	*line = ft_substr(file[fd], 0, newline(file[fd]));
-	file[fd] = ft_substr(file[fd], newline(file[fd]) + 1, ft_strlen(file[fd]));
-	temp ? free(temp) : NULL;
+	line_filler(line, &file[fd]);
 	if (buffer_tam == 0)
-		return (0);
+		return (free_file(&file[fd]));
 	return (1);
 }
