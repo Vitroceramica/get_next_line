@@ -6,7 +6,7 @@
 /*   By: antonmar <antonmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:22:12 by antonmar          #+#    #+#             */
-/*   Updated: 2020/11/30 13:57:06 by antonmar         ###   ########.fr       */
+/*   Updated: 2020/12/02 11:01:12 by antonmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,8 @@ void	file_filler(char **file, char *buffer)
 	{
 		temp = *file;
 		*file = ft_strjoin(*file, buffer);
-		if (temp)
-		{
-			(temp) ? free(temp) : NULL;
-			temp = NULL;
-		}
+		(temp) ? free(temp) : NULL;
+		temp = NULL;
 	}
 }
 
